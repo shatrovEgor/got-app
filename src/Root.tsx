@@ -1,27 +1,26 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import Header from './components/Header';
-import { gotService } from './services/api';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient } from '@tanstack/query-core';
 import FilltredModule from './components/FilltredModule';
-import MainBoard from './components/MainBoard';
 import PaginationModule from './components/PaginationModule';
+import { Outlet } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
-function App() {
+function Root() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className='App'>
         <Header />
         <FilltredModule />
-        <MainBoard />
+        {/* <MainBoard /> */}
+        <Outlet />
         <PaginationModule />
       </div>
     </QueryClientProvider>
   );
 }
 
-export default App;
+export default Root;

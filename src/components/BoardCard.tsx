@@ -3,39 +3,52 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import Typography from '@mui/material/Typography';
 
-const bull = (
-  <Box component='span' sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-    •
-  </Box>
-);
-
-export default function BoardCard() {
+//FXED TYPES
+const BoardCard = ({ cardInfo }: { cardInfo: any }) => {
   return (
-    // <Card sx={{ minWidth: 275, backgroundImage: `url('../../images/card.jpg')`, color: 'white' }}>
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
+    <Card
+      sx={{
+        minWidth: 275,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-          Word of the Day
+          Name: {cardInfo.name || '-'}
         </Typography>
         <Typography variant='h5' component='div'>
-          be{bull}nev{bull}o{bull}lent
+          {cardInfo.aliases[0] !== '' ? `Alias "${cardInfo.aliases[0]}"` : 'No alias 😞'}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-          adjective
+          Played by: {cardInfo.playedBy[0] || '-'}
         </Typography>
         <Typography variant='body2'>
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+          Titles:{' '}
+          {cardInfo.titles[0]
+            ? cardInfo.titles.map((title: string, index: number) => {
+                if (index + 1 !== cardInfo.titles.length) {
+                  return `"${title}", `;
+                }
+                return `"${title}" `;
+              })
+            : 'No titles'}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'space-between' }}>
         <Button size='small'>Learn More</Button>
+        <Button variant='outlined' startIcon={<DeleteIcon />} color='error'>
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );
-}
+};
+
+export default BoardCard;

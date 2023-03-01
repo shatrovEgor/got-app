@@ -4,7 +4,7 @@ import { Stack } from '@mui/material';
 const FilltredModule = () => {
   return (
     <Stack
-      marginTop='90px'
+      marginTop='70px'
       width='calc(100vw - 300px)'
       height='100px'
       sx={{
