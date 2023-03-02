@@ -20,7 +20,7 @@ const PaginationModule = () => {
 
   return (
     <Stack
-      marginTop='15px'
+      marginBottom='15px'
       paddingTop='2px'
       paddingBottom='2px'
       sx={{ backgroundColor: 'white', borderRadius: '16px' }}

@@ -30,7 +30,7 @@ const MainBoard = () => {
   const { isLoading } = useFilteredData(Number(currentPage), 15, currentFilter);
 
   return (
-    <Stack marginTop='30px' width='85vw' height={680}>
+    <Stack marginY='30px' width='85vw' height='calc(100% - 310px)'>
       {isLoading ? (
         <SkeletonLoader />
       ) : (

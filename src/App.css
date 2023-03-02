@@ -1,6 +1,8 @@
 .App {
   text-align: center;
+  width: 100vw;
   height: 100vh;
+  overflow: hidden;
   background-image: url('../public/images/back.jpg');
   display: flex;
   flex-direction: column;

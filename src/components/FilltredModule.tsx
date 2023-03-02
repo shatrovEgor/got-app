@@ -23,9 +23,9 @@ const FilltredModule = () => {
 
   return (
     <Stack
-      marginTop='70px'
+      marginTop='100px'
       width='85vw'
-      height='100px'
+      height='110px'
       sx={{
         backgroundColor: 'white',
         borderRadius: '10px',
