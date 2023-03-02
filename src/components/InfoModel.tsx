@@ -15,7 +15,7 @@ interface InfoModalProps {
 const InfoModal = ({ open, handleClose }: InfoModalProps) => {
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
+      <DialogTitle>Detailed information</DialogTitle>
       <DialogContent>
         <DialogContentText>
           To subscribe to this website, please enter your email address here. We will send updates

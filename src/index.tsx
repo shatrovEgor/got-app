@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root';
 import MainBoard from './components/MainBoard';
+import HelloWindow from './components/HelloWindow';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: ':pageId',
         element: <MainBoard />,
+      },
+      {
+        path: '',
+        element: <HelloWindow />,
       },
     ],
   },

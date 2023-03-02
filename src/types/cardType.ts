@@ -1,0 +1,41 @@
+export interface CardInfo {
+  name: string;
+  url: string;
+
+  aliases?: string[];
+  allegiances?: string[];
+  books?: string[];
+  born?: string;
+  culture?: string;
+  died?: string;
+  father?: string;
+  gender?: string;
+  mother?: string;
+  playedBy?: string[];
+  povBooks?: string[];
+  spouse?: string;
+  titles?: string[];
+  tvSeries?: string[];
+  authors?: string[];
+  characters?: string[];
+  country?: string;
+  isbn?: string;
+  mediaType?: string;
+  numberOfPages?: number;
+  povCharacters?: string[];
+  publisher?: string;
+  released?: string;
+  ancestralWeapons?: string[];
+  cadetBranches?: string[];
+  coatOfArms?: string;
+  currentLord?: string;
+  diedOut?: string;
+  founded?: string;
+  founder?: string;
+  heir?: string;
+  overlord?: string;
+  region?: string;
+  seats?: string[];
+  swornMembers?: string[];
+  words?: string;
+}

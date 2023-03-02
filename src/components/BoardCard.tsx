@@ -8,9 +8,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import InfoModal from './InfoModel';
 import { useState } from 'react';
+import { CardInfo } from '../types/cardType';
+import { dispatch } from '../store';
+import { deleteCard } from '../store/slices/dataCard';
 
 //FXED TYPES
-const BoardCard = ({ cardInfo, type }: { cardInfo: any; type: string }) => {
+const BoardCard = ({ cardInfo, type }: { cardInfo: CardInfo; type: string }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -21,6 +24,10 @@ const BoardCard = ({ cardInfo, type }: { cardInfo: any; type: string }) => {
     setOpen(false);
   };
 
+  const handleDeleteCard = (url: string) => {
+    dispatch(deleteCard(url));
+  };
+
   let title = '';
   let name = '';
   let subTitle = '';
@@ -28,17 +35,21 @@ const BoardCard = ({ cardInfo, type }: { cardInfo: any; type: string }) => {
 
   switch (type) {
     case 'characters':
-      title = cardInfo.aliases[0] !== '' ? `Alias "${cardInfo.aliases[0]}"` : 'No alias 😞';
+      title =
+        cardInfo.aliases && cardInfo.aliases[0] !== ''
+          ? `Alias "${cardInfo.aliases[0]}"`
+          : 'No alias 😞';
       name = `Names: ${cardInfo.name || '-'}`;
-      subTitle = `Played by: ${cardInfo.playedBy[0] || '-'}`;
-      secondSubTitle = cardInfo.titles[0]
-        ? `Titles: ${cardInfo.titles.map((title: string) => ` "${title}"`)}`
-        : 'No titles';
+      subTitle = `Played by: ${(cardInfo.playedBy && cardInfo.playedBy[0]) || '-'}`;
+      secondSubTitle =
+        cardInfo.titles && cardInfo.titles[0]
+          ? `Titles: ${cardInfo.titles.map((title: string) => ` "${title}"`)}`
+          : 'No titles';
       break;
     case 'books':
       title = cardInfo.name || '-';
-      name = `Authors: ${cardInfo.authors.map((elem: string) => elem)}`;
-      subTitle = `Released ${new Date(cardInfo.released).getFullYear()}`;
+      name = `Authors: ${cardInfo.authors && cardInfo.authors.map((elem: string) => elem)}`;
+      subTitle = `Released ${cardInfo.released && new Date(cardInfo.released).getFullYear()}`;
       secondSubTitle = `Country - ${cardInfo.country}`;
       break;
     case 'houses':
@@ -76,7 +87,12 @@ const BoardCard = ({ cardInfo, type }: { cardInfo: any; type: string }) => {
           <Button size='small' onClick={handleClickOpen}>
             Learn More
           </Button>
-          <Button variant='outlined' startIcon={<DeleteIcon />} color='error'>
+          <Button
+            variant='outlined'
+            startIcon={<DeleteIcon />}
+            color='error'
+            onClick={() => handleDeleteCard(cardInfo.url)}
+          >
             Delete
           </Button>
         </CardActions>
