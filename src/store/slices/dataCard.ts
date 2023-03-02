@@ -7,6 +7,7 @@ import { dispatch } from '../index';
 
 const initialState = {
   dataCards: [] as CardInfo[],
+  currentCard: null as CardInfo | null,
 };
 
 const slice = createSlice({
@@ -19,6 +20,12 @@ const slice = createSlice({
     deleteCard(state, action: PayloadAction<string>) {
       const newArr = state.dataCards.filter((elem) => elem.url !== action.payload);
       state.dataCards = newArr;
+    },
+    selectCard(state, action: PayloadAction<string>) {
+      const currentCard = state.dataCards.find((elem) => elem.url === action.payload);
+      if (currentCard) {
+        state.currentCard = currentCard;
+      }
     },
   },
 });
@@ -37,5 +44,11 @@ export function fillCardData(data: CardInfo[]) {
 export function deleteCard(data: string) {
   return () => {
     dispatch(slice.actions.deleteCard(data));
+  };
+}
+
+export function selectCard(data: string) {
+  return () => {
+    dispatch(slice.actions.selectCard(data));
   };
 }

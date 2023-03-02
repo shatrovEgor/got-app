@@ -4,28 +4,28 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import Typography from '@mui/material/Typography';
-import InfoModal from './InfoModel';
-import { useState } from 'react';
 import { CardInfo } from '../types/cardType';
 import { dispatch } from '../store';
 import { deleteCard } from '../store/slices/dataCard';
 
-//FXED TYPES
-const BoardCard = ({ cardInfo, type }: { cardInfo: CardInfo; type: string }) => {
-  const [open, setOpen] = useState(false);
+interface CardProps {
+  cardInfo: CardInfo;
+  type: string;
+  openModal: (url: string) => void;
+}
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+const BoardCard = ({ cardInfo, type, openModal }: CardProps) => {
   const handleDeleteCard = (url: string) => {
     dispatch(deleteCard(url));
+    // This is a function at work
+    // window.dataLayer.push({
+    //   event: 'delete',
+    //   eventProps: {
+    //       id: url,
+    //       type: type
+    //   }
+    // });
   };
 
   let title = '';
@@ -84,7 +84,7 @@ const BoardCard = ({ cardInfo, type }: { cardInfo: CardInfo; type: string }) => 
           <Typography variant='body2'>{secondSubTitle}</Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'space-between' }}>
-          <Button size='small' onClick={handleClickOpen}>
+          <Button size='small' onClick={() => openModal(cardInfo.url)}>
             Learn More
           </Button>
           <Button
@@ -97,8 +97,6 @@ const BoardCard = ({ cardInfo, type }: { cardInfo: CardInfo; type: string }) => 
           </Button>
         </CardActions>
       </Card>
-      {/* Info Modal */}
-      <InfoModal open={open} handleClose={handleClose} />
     </>
   );
 };

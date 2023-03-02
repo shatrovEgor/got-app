@@ -1,19 +1,31 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/react-in-jsx-scope */
 import { Stack, Grid } from '@mui/material';
+import { useState } from 'react';
 import BoardCard from './BoardCard';
 import { useParams } from 'react-router-dom';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { useSelector } from '../store';
+import { dispatch, useSelector } from '../store';
 import { useFilteredData } from '../services/hooks/useAllData';
 import SkeletonLoader from './SkeletonLoader';
+import InfoModal from './InfoModel';
+import { selectCard } from '../store/slices/dataCard';
 
 const MainBoard = () => {
   const { currentFilter }: { currentFilter: string } = useSelector((state) => state.filters);
   const { dataCards } = useSelector((state) => state.dataCards);
-
   const { pageId: currentPage } = useParams();
+
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = (url: string) => {
+    dispatch(selectCard(url));
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const { isLoading } = useFilteredData(Number(currentPage), 15, currentFilter);
 
@@ -28,13 +40,19 @@ const MainBoard = () => {
               dataCards.map((elem, index) => {
                 return (
                   <Grid key={index} item xs={1} sm={8} md={6} lg={4}>
-                    <BoardCard cardInfo={elem} type={currentFilter}></BoardCard>
+                    <BoardCard
+                      cardInfo={elem}
+                      type={currentFilter}
+                      openModal={handleClickOpen}
+                    ></BoardCard>
                   </Grid>
                 );
               })}
           </Grid>
         </PerfectScrollbar>
       )}
+      {/* Info Modal */}
+      <InfoModal open={open} handleClose={handleClose} />
     </Stack>
   );
 };
