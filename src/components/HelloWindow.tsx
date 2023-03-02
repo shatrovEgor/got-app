@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Stack } from '@mui/material';
-import SkeletonLoader from './SkeletonLoader';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -17,7 +16,6 @@ const HelloWindow = () => {
 
   return (
     <Stack marginTop='30px' width='85vw' height={680}>
-      <SkeletonLoader />
       {/* Dialog */}
       <Dialog onClose={handleClose} open={open}>
         <DialogTitle>Welcome to the Game of Thrones world app</DialogTitle>

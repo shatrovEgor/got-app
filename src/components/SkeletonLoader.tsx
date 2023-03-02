@@ -5,7 +5,7 @@ import { Skeleton, Stack } from '@mui/material';
 const SkeletonLoader = () => {
   return (
     <Stack spacing={3}>
-      <Stack flexDirection='row'>
+      <Stack flexDirection='row' overflow='hidden'>
         <Skeleton
           variant='rounded'
           animation='wave'
